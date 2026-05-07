@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%
+    String userName = (String) session.getAttribute("userName");
+    String userRole = (String) session.getAttribute("userRole");
+    if (userName == null) {
+        userName = "Guest";
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +20,12 @@
 <div class="topbar">
     <a href="${pageContext.request.contextPath}/index.jsp" class="brand">Placement<span>MS</span></a>
     <span class="top-info">Placement Management System</span>
+    <% if (!userName.equals("Guest")) { %>
+    <div style="margin-left: auto; display: flex; align-items: center; gap: 15px; font-size: 12px; color: #666;">
+        <span>Welcome, <strong><%= userName %></strong> (<%= userRole %>)</span>
+        <a href="${pageContext.request.contextPath}/logout" style="color: #e74c3c; text-decoration: none; font-weight: 600;">Logout</a>
+    </div>
+    <% } %>
 </div>
 
 <div class="wrapper">

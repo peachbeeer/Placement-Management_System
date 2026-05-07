@@ -2,6 +2,12 @@
 <%@ page import="com.placement.dao.*" %>
 <%@ page import="java.util.*" %>
 <%
+    String userId = (String) session.getAttribute("userId");
+    if (userId == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+        return;
+    }
+    
     CompanyDAO cDao = new CompanyDAO();
     StudentDAO sDao = new StudentDAO();
     ApplicationDAO aDao = new ApplicationDAO();
